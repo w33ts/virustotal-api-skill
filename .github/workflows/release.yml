@@ -1,0 +1,30 @@
+name: Package and Release Skill
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'    # triggers on semver tags: v1.0.0, v1.2.3, etc.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # required to create releases and upload assets
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build .skill file
+        run: |
+          chmod +x package.sh
+          mkdir dist
+          ./package.sh ./dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: dist/virustotal-api.skill
+          generate_release_notes: true
+          fail_on_unmatched_files: true

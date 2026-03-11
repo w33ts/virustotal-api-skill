@@ -1,0 +1,14 @@
+{
+  "name": "virustotal-skill",
+  "description": "VirusTotal API v3 agent skill for threat intelligence lookups, file/URL scanning, IoC enrichment, and more",
+  "version": "1.0.0",
+  "author": "w33ts",
+  "homepage": "https://github.com/w33ts/virustotal-api-skill",
+  "plugins": [
+    {
+      "name": "virustotal-api",
+      "description": "VirusTotal API v3 - covers file/URL/domain/IP scanning, free vs enterprise tiers, rate limiting, and YARA hunting",
+      "skills": ["virustotal-api"]
+    }
+  ]
+}
